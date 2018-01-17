@@ -1,11 +1,87 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>グーグルチャート分析</title>
 </head>
+
 <body bgcolor="#ffc6c6">
-   <h1>グーグルチャート</h1>
-    <p>グラフ</p>
+    <h1>グーグルチャート</h1>
+    <h3>スマホゲームでお金を支払った経験の有無</h3>
+    <div id="target2"></div>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            function drawChart() {
+                var target = document.getElementById('target2');
+                var data;
+                var options = {
+                    title: 'スマホゲームでお金を支払った経験の有無',
+                    width: 800,
+                    height: 500,
+                    animation: {
+                        startup: true,
+                        duration: 800,
+                        easing: 'inAndOut'
+                    },
+                };
+                // var chart = new google.visualization.BarChart(target);
+                var chart = new google.visualization.ColumnChart(target);
+                data = new google.visualization.arrayToDataTable([
+                    ['項目', '割合'],
+                    ['お金を払ってゲーム内アイテムを購入したことがある', 18.4],
+                    ['ゲーム内の有料電子くじ（ガチャ）をしたことがある', 10.6],
+                    ['その他のゲーム内課金をしたことがある', 8.1],
+                    ['お金を払ったことは無い', 71.1],
+                    ['覚えていない', 4.6]
+                ]);
+                chart.draw(data, options);
+            }
+
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+        })();
+    </script>
+
+
+    <h3>スマホゲーム1タイトルに対する支払総額</h3>
+    <div id="target"></div>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            function drawChart() {
+                var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1D5XKxG-CRNM_EOgkxZyp_Ri7cvT2RkDCP1XiZ5bL8Ns/edit?usp=sharing');
+                query.send(handleQueryResponse);
+            }
+
+            function handleQueryResponse(response) {
+                var target = document.getElementById('target');
+                var data;
+                var options = {
+                    title: 'My Chart',
+                    width: 800,
+                    height: 500
+                };
+                var chart = new google.visualization.PieChart(target);
+                data = response.getDataTable();
+                chart.draw(data, options);
+            }
+
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+        })();
+    </script>
+
+
 </body>
+
 </html>

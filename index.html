@@ -8,7 +8,7 @@
 
 <body bgcolor="#ffc6c6">
     <h1>グーグルチャート</h1>
-    
+
     <h2>スマホゲームの課金について</h2>
 
     <h3>背景</h3>
@@ -25,7 +25,7 @@
                 var target = document.getElementById('target2');
                 var data;
                 var options = {
-                    title: 'スマホゲームでお金を支払った経験の有無',
+                    title: 'スマホゲームでお金を支払った経験の有無(消費者庁ー"スマホゲームの動向"より)',
                     width: 800,
                     height: 500,
                     animation: {
@@ -53,9 +53,56 @@
             google.charts.setOnLoadCallback(drawChart);
         })();
     </script>
-    
-    <p>これはスマホゲームに課金したことがあるかどうか経験の割合を表すグラフである。スマホゲームで遊ぶ人の7割は課金したことがないという結果である。
-    残りの3割の人が運営を支えているということである。</p>
+
+    <p>これはスマホゲームで遊ぶ人のうち、スマホゲームに課金したことがあるかどうか経験の割合を表すグラフである。スマホゲームで遊ぶ人のうち7割は課金したことがないという結果である。 残りの3割の人が運営を支えているということである。
+    </p>
+
+
+    <h3>スマホゲームでお金を支払った経験の有無（年齢別）</h3>
+    <div id="target3"></div>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        (function() {
+            'use strict';
+
+            function drawChart() {
+                var target = document.getElementById('target3');
+                var data;
+                var options = {
+                    title: 'My Chart',
+                    width: 500,
+                    height: 300,
+                    animation: {
+                        startup: true,
+                        duration: 800,
+                        easing: 'inAndOut'
+                    },
+                    // isStacked: true
+                    isStacked: 'percent'
+                };
+                // var chart = new google.visualization.BarChart(target);
+                var chart = new google.visualization.ColumnChart(target);
+                data = new google.visualization.arrayToDataTable([
+                    ['年齢', '課金をした', '課金をしたことは無い','覚えていない'],
+                    ['中学生', 30.1,61,8.9 ],
+                    ['高校生', 25,67.3,7.7],
+                    ['大学生（未成年）', 27.1, 65.4,7.5],
+                    ['大学生（成年）',36.7,54.4,8.9],
+                    ['20代社会人',34.7,61,4.3],
+                    ['30代',29.6,67,3.4],
+                    ['40代',24,73,3],
+                    ['50代',17.2,80.6,2.2]
+                ]);
+                chart.draw(data, options);
+            }
+
+            google.charts.load('current', {
+                packages: ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+        })();
+    </script>
+    <p>これは年齢別に課金の有無の割合を示したものである。大学生（成年）をピークに、年齢が上がるにつれ課金する人の割合が減っているが、若者の割合の差はそんなに大きくはない。スマホに慣れ親しんだ若者のほうが課金する割合が高い。経済的に自立していない未成年も3割ほど課金している結果になっており、お金の出所が気になる。</p>
 
 
     <h3>スマホゲーム1タイトルに対する支払総額</h3>
@@ -89,6 +136,8 @@
             google.charts.setOnLoadCallback(drawChart);
         })();
     </script>
+    
+    <p>課金する人のうち、スマホゲーム1タイトルに対する支払総額を見ると55％くらいの人が1500円未満という結果である。そんなに払わなくても十分楽しめるからなのか、いつ消えるかわからないものにお金をかけるのは不安なのだろうか。1500円未満の人が多くて運営は成り立つのかと思うが、２％ほどが１０万円以上費やしているという結果である。この人たちのおかげで多くの人がゲームをプレイできているのだからありがたい。</p>
 
 
 </body>
